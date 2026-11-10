@@ -201,6 +201,6 @@ Se abre en http://localhost:8085/alumnos. Para generar el jar: `.\mvnw.cmd clean
 ## Enlaces
 
 - Repositorio: https://github.com/23161115-estud/ERDact3_t4
-- Proyecto en el VPS: http://[IP_DEL_VPS]:8085/alumnos
-- API en el VPS: http://[IP_DEL_VPS]:8085/api/alumnos
+- Proyecto en el VPS: http://216.238.69.868085/alumnos
+- API en el VPS: http://216.238.69.86:8085/api/alumnos
 - Colección de Postman: [`postman/ERDact3_t4.postman_collection.json`](postman/ERDact3_t4.postman_collection.json)
