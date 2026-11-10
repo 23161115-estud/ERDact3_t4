@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Formulario de alumno</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+<header class="barra">
+    <span class="barra__proyecto" th:text="${nombreProyecto}">Proyecto</span>
+    <span class="barra__autor" th:text="'Autor: ' + ${autor}">Autor</span>
+</header>
+
+<main class="contenedor">
+    <h1 th:text="${titulo}">Nuevo alumno</h1>
+
+    <p class="error" th:if="${error}" th:text="${error}">Error</p>
+
+    <form class="formulario" th:action="@{/alumnos/guardar}" th:object="${alumno}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required="required" maxlength="100"/>
+        </div>
+
+        <div class="campo">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" th:field="*{correo}" required="required" maxlength="120"/>
+        </div>
+
+        <div class="campo">
+            <label for="semestre">Semestre</label>
+            <input type="number" id="semestre" th:field="*{semestre}" min="1" max="12" required="required"/>
+        </div>
+
+        <div class="campo">
+            <label for="carreraId">Carrera</label>
+            <select id="carreraId" th:field="*{carreraId}" required="required">
+                <option value="">Selecciona una carrera</option>
+                <option th:each="c : ${carreras}" th:value="${c.id}" th:text="${c.nombre}">Carrera</option>
+            </select>
+        </div>
+
+        <div class="acciones">
+            <button type="submit" class="boton">Guardar</button>
+            <a th:href="@{/alumnos}">Cancelar</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

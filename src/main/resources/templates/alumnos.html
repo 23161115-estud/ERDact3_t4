@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Alumnos</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+<header class="barra">
+    <span class="barra__proyecto" th:text="${nombreProyecto}">Proyecto</span>
+    <span class="barra__autor" th:text="'Autor: ' + ${autor}">Autor</span>
+</header>
+
+<main class="contenedor">
+    <div class="encabezado">
+        <h1>Alumnos</h1>
+        <a class="boton" th:href="@{/alumnos/nuevo}">Nuevo alumno</a>
+    </div>
+
+    <p class="mensaje" th:if="${mensaje}" th:text="${mensaje}">Mensaje</p>
+    <p class="error" th:if="${error}" th:text="${error}">Error</p>
+
+    <form class="filtro" th:action="@{/alumnos}" method="get">
+        <label for="carreraId">Carrera</label>
+        <select id="carreraId" name="carreraId">
+            <option value="">Todas</option>
+            <option th:each="c : ${carreras}"
+                    th:value="${c.id}"
+                    th:text="${c.nombre} + ' (' + ${c.totalAlumnos} + ')'"
+                    th:selected="${c.id == carreraSeleccionada}">Carrera</option>
+        </select>
+        <button type="submit" class="boton boton--secundario">Filtrar</button>
+        <a th:if="${carreraSeleccionada != null}" th:href="@{/alumnos}">Quitar filtro</a>
+    </form>
+
+    <p class="resumen" th:text="${alumnos.size()} + ' alumno(s) encontrado(s)'">0 alumnos</p>
+
+    <table class="tabla" th:if="${!alumnos.isEmpty()}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Semestre</th>
+            <th>Carrera</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="a : ${alumnos}">
+            <td th:text="${a.id}">1</td>
+            <td th:text="${a.nombre}">Nombre</td>
+            <td th:text="${a.correo}">correo</td>
+            <td th:text="${a.semestre}">1</td>
+            <td th:text="${a.carreraNombre}">Carrera</td>
+            <td class="acciones">
+                <a th:href="@{/alumnos/{id}/editar(id=${a.id})}">Editar</a>
+                <form th:action="@{/alumnos/{id}/eliminar(id=${a.id})}" method="post" onsubmit="return confirm('Seguro que quieres eliminar este alumno?')">
+                    <button type="submit" class="boton boton--peligro">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p class="vacio" th:if="${alumnos.isEmpty()}">No hay alumnos para mostrar.</p>
+</main>
+</body>
+</html>

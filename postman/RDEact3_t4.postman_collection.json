@@ -1,0 +1,261 @@
+{
+  "info": {
+    "name": "RDEact3_t4 - CRUD Alumnos y Carreras",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Alumnos",
+      "item": [
+        {
+          "name": "Listar alumnos (Read)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/alumnos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos"
+              ]
+            },
+            "description": "Cada alumno incluye carreraId y carreraNombre."
+          }
+        },
+        {
+          "name": "Obtener un alumno (Read)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/alumnos/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Crear alumno (Create)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/alumnos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Pedro Gil Mora\",\n  \"correo\": \"pedro.gil@escuela.mx\",\n  \"semestre\": 4,\n  \"carreraId\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Responde 201 Created."
+          }
+        },
+        {
+          "name": "Actualizar alumno (Update)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/alumnos/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Ana López Ruiz\",\n  \"correo\": \"ana.lopez@escuela.mx\",\n  \"semestre\": 6,\n  \"carreraId\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Eliminar alumno (Delete)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/alumnos/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos",
+                "1"
+              ]
+            },
+            "description": "Responde 204 No Content."
+          }
+        },
+        {
+          "name": "Error: alumno inexistente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/alumnos/9999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos",
+                "9999"
+              ]
+            },
+            "description": "Responde 404 con {\"error\": \"...\"}."
+          }
+        },
+        {
+          "name": "Error: datos inválidos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/alumnos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "alumnos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"\",\n  \"correo\": \"sin-arroba\",\n  \"semestre\": 20,\n  \"carreraId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "description": "Responde 400 con {\"error\": \"...\"}."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Carreras",
+      "item": [
+        {
+          "name": "Listar carreras (con total de alumnos)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/carreras",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "carreras"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Crear carrera",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/carreras",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "carreras"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Medicina\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Alumnos de una carrera (relación)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/carreras/1/alumnos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "carreras",
+                "1",
+                "alumnos"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8085"
+    }
+  ]
+}
